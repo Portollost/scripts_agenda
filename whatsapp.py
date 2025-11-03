@@ -1,10 +1,21 @@
-# app/whatsapp.py ou mesmo whatsapp.py na raiz
-
-import os
+import requests
+from config import WHATSAPP_API_URL, WHATSAPP_TOKEN
 
 def get_headers():
-    token = os.environ.get("WHATSAPP_TOKEN", "EAG0T5mPOlhcBPisAgdSBkKqm72XgZBnr9v3eK6ox88leBoVW4v3fRFaGkhZCp8AF2sZBBjjLfrhfYW0r9umFSzA3fE8ByziCirIZAcjKnAZBQ4LsQS670z3twxxhsQ15NuNEjhSmpLVtZA7WSSSZAMX7mxVycF9Cwmy39lxCy8Nwc7mHaGCUKFLtUN4p0BoQsFcIQZDZD")
-    return {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    return {
+        "Authorization": f"Bearer {WHATSAPP_TOKEN}",
+        "Content-Type": "application/json"
+    }
 
-def get_number_id():
-    return os.environ.get("WHATSAPP_NUMBER_ID", "795215293676591")
+def enviar_mensagem(numero, texto):
+    payload = {
+        "messaging_product": "whatsapp",
+        "to": numero,
+        "type": "text",
+        "text": {"body": texto}
+    }
+    response = requests.post(WHATSAPP_API_URL, headers=get_headers(), json=payload)
+    if response.status_code != 200:
+        print(f"❌ Erro ao enviar mensagem para {numero}: {response.text}")
+    else:
+        print(f"✅ Mensagem enviada para {numero}")
