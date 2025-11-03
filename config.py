@@ -9,7 +9,10 @@ db_config = {
 
 # Lista de contatos para envio
 contatos = [
-    '553171538434'
+    "553171538434",
+    "553187014538",
+    "553172079788",
+    "553182657231"
 ]
 
 # URL e token da API oficial do WhatsApp (Meta Cloud API)
