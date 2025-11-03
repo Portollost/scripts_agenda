@@ -26,7 +26,7 @@ def loop_agendado():
     while True:
         agora = datetime.now(brasilia_tz)
         # Executa apenas uma vez por dia, às 08:00
-        if agora.hour == 18 and agora.minute == 45:
+        if agora.hour == 8 and agora.minute == 00:
             if ultima_execucao != agora.date():
                 job()
                 ultima_execucao = agora.date()
